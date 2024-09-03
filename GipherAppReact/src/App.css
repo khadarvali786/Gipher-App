@@ -1,0 +1,25 @@
+
+  /* .light-mode {
+    background-color: white;
+    color: black;
+  }
+  
+  .dark-mode {
+    background-color: black;
+    color: white;
+  } */
+
+  .loader{
+    display: "block";
+    margin: "0 auto";
+  }
+  .dark-theme{
+    transition: background-color 0.3s, color 0.3s;
+    background-color: black;
+    color: white;
+  }
+  .light-theme{
+    transition: background-color 0.3s, color 0.3s;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+  }

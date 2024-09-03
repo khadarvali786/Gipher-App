@@ -1,0 +1,7 @@
+.dark-mode{
+    background-color: black !important;
+    color: white;
+}
+.darmode-Icon:hover{
+    cursor: pointer;
+}
