@@ -50,7 +50,7 @@ function App() {
       }, 5000);
       //     const response = await fetch('http://localhost:1431');
       //   const data = await response.json();
-      const response = await axios.get("http://localhost:8080");
+      const response = await axios.get("https://gipher-app.onrender.com");
       console.log(response.data);
       setGifs(response.data);
     }
@@ -102,18 +102,7 @@ function App() {
             darkMode={darkMode}
             getSearchData={getSearchData}
           ></NavBar>
-          {isLoading ? (
-            <div className="loader">
-              <BounceLoader
-                color="#485cff"
-                loading={isLoading}
-                // cssOverride={override}
-                size={100}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-            </div>
-          ) : (
+          {
             <HomePage
               gif={gif}
               onLike={handleLike}
@@ -122,7 +111,7 @@ function App() {
               bookMarkGifs={bookMarks}
               darkMode={darkMode}
             />
-          )}
+          }
         </>
       ),
       errorElement: <ErrorPage />,

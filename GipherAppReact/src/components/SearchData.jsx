@@ -12,29 +12,24 @@ export default function SearchData({
   bookMarkGifs,
   onBookMark,
 }) {
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate an API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  });
 
-  if (isLoading) {
-    return (
-      <div className="loader">
-        <BounceLoader
-          color="#485cff"
-          loading={isLoading}
-          // cssOverride={override}
-          size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    );
-  }
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="loader">
+  //       <BounceLoader
+  //         color="#485cff"
+  //         loading={isLoading}
+  //         // cssOverride={override}
+  //         size={100}
+  //         aria-label="Loading Spinner"
+  //         data-testid="loader"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

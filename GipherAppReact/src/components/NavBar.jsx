@@ -13,7 +13,7 @@ export default function NavBar({ modechange, darkMode, getSearchData }) {
   const handleSearchForm = async (event) => {
     event.preventDefault();
     const response = await axios.get(
-      `http://localhost:8080/gifs/search?q=${search}`
+      `https://gipher-app.onrender.com/gifs/search?q=${search}`
     );
     navigate(`/search/${search}`);
     getSearchData(response.data, search);
