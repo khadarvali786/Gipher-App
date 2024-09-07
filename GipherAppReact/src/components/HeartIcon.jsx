@@ -1,5 +1,3 @@
-import { useState } from "react";
-import axios from "axios"; // node
 
 export default function HeartIcon({ gif, onLike, isLiked }) {
 

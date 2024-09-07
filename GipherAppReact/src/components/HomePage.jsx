@@ -5,11 +5,16 @@ import "./HomePage.css";
 import HeartIcon from "./HeartIcon";
 import BookMarkIcon from "./BookMarkIcon";
 import '../App.css'
+import { useSelector } from "react-redux";
+import Spinner from "./Spinner";
 
 export default function HomePage({ gif ,onLike, likedGifs,bookMarkGifs,onBookMark,darkMode}) {
+  const {loaderVal} = useSelector(store=>store.loader);
+  
   return (
     <>
-      <div className="homepage " data-bs-theme={darkMode?"dark":""}>
+    {loaderVal && <Spinner/>}
+     {!loaderVal && <div className="homepage " data-bs-theme={darkMode?"dark":""}>
         <h1>Home Page</h1>
         <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 gap-3">
           {gif.map((item) => {
@@ -38,7 +43,7 @@ export default function HomePage({ gif ,onLike, likedGifs,bookMarkGifs,onBookMar
             );
           })}
         </div>
-      </div>
+      </div>}
     </>
   );
 }

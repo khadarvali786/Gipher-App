@@ -8,8 +8,10 @@ import HomePage from "./components/HomePage";
 
 import ErrorPage from "./components/error_paga";
 import SearchData from "./components/SearchData";
-import {BounceLoader } from "react-spinners";
+import { BounceLoader } from "react-spinners";
 import NavBar from "./components/NavBar";
+import { useDispatch } from "react-redux";
+import { loaderActions } from "./store";
 
 // const override= {
 //   display: "block",
@@ -26,6 +28,8 @@ function App() {
   const [searchobj, setsearchData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const dispatch = useDispatch();
+
   const Togglemode = () => {
     setDarkMode(!darkMode);
     if (theme === "dark-theme") {
@@ -39,37 +43,27 @@ function App() {
   }, [theme]);
 
   const getSearchData = (searchData, search) => {
+    setTimeout(() => {
+      dispatch(loaderActions.change());
+    }, 5000);
     setsearchData(searchData);
     setSearch(search);
+    dispatch(loaderActions.change());
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      dispatch(loaderActions.change());
+    }, 5000);
     async function fetchData() {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 5000);
       //     const response = await fetch('http://localhost:1431');
       //   const data = await response.json();
       const response = await axios.get("https://gipher-app.onrender.com");
-      console.log(response.data);
       setGifs(response.data);
+      dispatch(loaderActions.change());
     }
     fetchData();
   }, []);
-  // if(isLoading){
-  //   return(
-  //    <div className="loader">
-  //      <BounceLoader
-  //     color='#485cff'
-  //     loading={isLoading}
-  //     // cssOverride={override}
-  //     size={100}
-  //     aria-label="Loading Spinner"
-  //     data-testid="loader"
-  //   />
-  //    </div>
-  //   )
-  // }
 
   const handleLike = (gif) => {
     setLikedGifs((prevLikedGifs) => {
@@ -96,7 +90,6 @@ function App() {
       path: "/",
       element: (
         <>
-          {" "}
           <NavBar
             modechange={Togglemode}
             darkMode={darkMode}
@@ -127,7 +120,12 @@ function App() {
       element: (
         <>
           <NavBar modechange={Togglemode} darkMode={darkMode}></NavBar>
-          <BookMark bookMarks={bookMarks} darkMode={darkMode} />
+          <BookMark
+            onBookMark={handleBookMark}
+            bookMarkGifs={bookMarks}
+            bookMarks={bookMarks}
+            darkMode={darkMode}
+          />
         </>
       ),
     },
@@ -136,7 +134,11 @@ function App() {
       element: (
         <>
           <NavBar modechange={Togglemode} darkMode={darkMode}></NavBar>
-          <Favourites likedGifs={likedGifs} darkMode={darkMode} />
+          <Favourites
+            likedGifs={likedGifs}
+            darkMode={darkMode}
+            onLike={handleLike}
+          />
         </>
       ),
     },

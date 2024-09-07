@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import BookMarkIcon from "./BookMarkIcon";
 import HeartIcon from "./HeartIcon";
 import "./HomePage.css";
-import { BounceLoader } from "react-spinners";
+import { useSelector } from "react-redux";
+import Spinner from "./Spinner";
 export default function SearchData({
   gif,
   darkMode,
@@ -12,28 +12,12 @@ export default function SearchData({
   bookMarkGifs,
   onBookMark,
 }) {
-  //const [isLoading, setIsLoading] = useState(true);
-
-
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="loader">
-  //       <BounceLoader
-  //         color="#485cff"
-  //         loading={isLoading}
-  //         // cssOverride={override}
-  //         size={100}
-  //         aria-label="Loading Spinner"
-  //         data-testid="loader"
-  //       />
-  //     </div>
-  //   );
-  // }
+const {loaderVal}=useSelector(store=>store.loader);
 
   return (
     <>
-      <div className="homepage" data-bs-theme={darkMode ? "dark" : ""}>
+    {loaderVal && <Spinner/>}
+     {!loaderVal && <div className="homepage" data-bs-theme={darkMode ? "dark" : ""}>
         <h1>Search {search}</h1>
         <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 gap-3">
           {gif.map((item) => {
@@ -64,7 +48,7 @@ export default function SearchData({
             );
           })}
         </div>
-      </div>
+      </div>}
     </>
   );
 }
